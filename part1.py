@@ -3,7 +3,7 @@ import rl
 from part1_input_handlers import handle_keys
 
 def update(event):
-    global console, font, player_x, player_y
+    global font, player_x, player_y
 
     if event > 0:
         action = handle_keys(event)
@@ -17,13 +17,11 @@ def update(event):
         if exit:
             rl.quit()
 
-    console.fill(0)
-    console[player_x, player_y] = ord('@') - 32
-
-    rl.draw_array(console, font, 0, 0)
+    rl.clear()
+    rl.draw_tile(font, player_x * font.tile_width, player_y * font.tile_height, ord('@'))
 
 def main():
-    global console, font, player_x, player_y
+    global font, player_x, player_y
 
     screen_width = 80
     screen_height = 50
@@ -31,12 +29,9 @@ def main():
     player_x = screen_width // 2
     player_y = screen_height // 2
 
-    font = rl.Image('arial10x10.png', 10, 10)
+    font = rl.Image('arial_32x32.png', 32, 32)
 
-    rl.init_display('libtcod tutorial revised', screen_width * 10, screen_height * 10)
-
-    console = rl.Array(screen_width, screen_height)
-
+    rl.init_display('libtcod tutorial revised', screen_width * font.tile_width, screen_height * font.tile_height)
     rl.run(update)
 
 if __name__ == '__main__':
