@@ -1,6 +1,6 @@
 import rl
 
-from part1_input_handlers import handle_keys
+from input_handlers import handle_keys
 
 def update(event):
     global font, player_x, player_y
